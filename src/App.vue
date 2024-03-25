@@ -3,8 +3,10 @@
     <div class="container-fluid my-3 border rounded py-3">
       <div class="row my-1">
         <div class="col">
-          <label class="form-label" for="taak">Nieuwe taak:</label>
-          <input class="form-control" id="taak" v-model="newTask" type="text">
+          <label class="form-label">Nieuwe taak:</label>
+          <input class="form-control my-1" id="priority" v-model="priority" type="number" min="1" max="3" placeholder="prioriteit">
+          <input class="form-control my-1" id="label" v-model="label" type="text" placeholder="label">
+          <textarea class="form-control my-1" id="description" v-model="description" type="text" placeholder="omschrijving"></textarea>
         </div>
       </div>
       <div class="row my-1">
@@ -15,7 +17,15 @@
     </div>
     <div class="container-fluid" v-show="tasks.length > 0">
       <ul class="row list-unstyled">
-        <li v-for="(task, index) in tasks" v-bind:key="task" @click="removeTask(index)" class="my-2 p-3 border rounded">{{ task }}</li>
+        <li v-for="(task, index) in tasks" :key="task.id" @click="removeTask(index)" class="col my-2 p-2 border rounded">
+          <div class="container">
+            <div class="row">
+              <h6 class="col-6">Prioriteit: {{ task.prio }}</h6>
+              <p class="badge rounded-pill text-bg-info col-4 offset-2 p-2">{{ task.label }}</p>
+              <p class="col">{{ task.description }}</p>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -24,13 +34,25 @@
 export default {
   data() {
     return {
-      newTask: "",
+      description: "",
+      priority: "",
+      label: "",
       tasks: []
     }
   },
   methods: {
     addTask() {
-      this.tasks.push(this.newTask);
+      const newTask = {
+        id: this.tasks.length + 1,
+        description: this.description,
+        priority: this.priority,
+        label: this.label
+      }
+      this.tasks.push(newTask);
+
+      this.description = "";
+      this.priority = "";
+      this.label = "";
     },
     removeTask(index) {
       this.tasks.splice(index, 1)
