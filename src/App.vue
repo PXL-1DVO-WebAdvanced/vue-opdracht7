@@ -17,21 +17,17 @@
     </form>
     <div class="container-fluid" v-show="tasks.length > 0">
       <ul class="row list-unstyled">
-        <li v-for="(task, index) in tasks" :key="task.id" @click="removeTask(index)" class="col-12 my-2 p-2 border rounded">
-          <div class="container">
-            <div class="row">
-              <h6 class="col-6">Prioriteit: {{ task.priority }}</h6>
-              <p class="badge rounded-pill text-bg-info col-4 offset-2 p-2">{{ task.label }}</p>
-              <p class="col">{{ task.description }}</p>
-            </div>
-          </div>
-        </li>
+        <TaskComponent v-for="task in tasks" :key="task.id" />
       </ul>
     </div>
   </div>
 </template>
 <script>
+import TaskComponent from './components/TaskComponent.vue';
 export default {
+  components: {
+    TaskComponent
+  },
   data() {
     return {
       description: "",
