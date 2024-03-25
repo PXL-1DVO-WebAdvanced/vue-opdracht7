@@ -1,6 +1,6 @@
 <template>
   <div class="w-25 m-auto">
-    <div class="container-fluid my-3 border rounded py-3">
+    <form class="container-fluid my-3 border rounded py-3" @submit.prevent="addTask()">
       <div class="row my-1">
         <div class="col">
           <label class="form-label">Nieuwe taak:</label>
@@ -11,10 +11,10 @@
       </div>
       <div class="row my-1">
         <div class="col d-flex justify-content-end">
-          <button class="btn btn-primary" @click="addTask()">Toevoegen</button>
+          <input type="submit" class="btn btn-primary" value="Toevoegen">
         </div>
       </div>
-    </div>
+    </form>
     <div class="container-fluid" v-show="tasks.length > 0">
       <ul class="row list-unstyled">
         <li v-for="(task, index) in tasks" :key="task.id" @click="removeTask(index)" class="col-12 my-2 p-2 border rounded">
