@@ -17,10 +17,10 @@
     </form>
     <div class="container-fluid" v-show="tasks.length > 0">
       <ul class="row list-unstyled">
-        <TaskComponent v-for="task in tasks" :key="task.id" 
-          :description="task.description"
-          :priority="task.priority"
-          :label="task.label" />
+        <TaskComponent v-for="task in tasks" 
+          :key="task.id" 
+          :task="task"
+          @changePriority="changeTaskPriority" />
       </ul>
     </div>
   </div>
@@ -55,6 +55,12 @@ export default {
     },
     removeTask(index) {
       this.tasks.splice(index, 1)
+    },
+    changeTaskPriority(object) {
+      let task = this.tasks.find(task => task.id = object.id);
+      if (task) {
+        task.priority = object.newPriority
+      }
     }
   }
 }
