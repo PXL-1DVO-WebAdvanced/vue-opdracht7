@@ -17,7 +17,10 @@
     </form>
     <div class="container-fluid" v-show="tasks.length > 0">
       <ul class="row list-unstyled">
-        <TaskComponent v-for="task in tasks" :key="task.id" />
+        <TaskComponent v-for="task in tasks" :key="task.id" 
+          :description="task.description"
+          :priority="task.priority"
+          :label="task.label" />
       </ul>
     </div>
   </div>

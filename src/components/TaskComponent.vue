@@ -11,13 +11,11 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            description: "Statische omschrijving",
-            priority: "1",
-            label: "component"
-        }
-    }
+    props: [
+        'description',
+        'priority',
+        'label'
+    ]
 }
 </script>
 <style scoped>
